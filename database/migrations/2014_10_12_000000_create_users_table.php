@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('jenisUMKM');
             $table->string('skalaUMKM');
             $table->string('nomorUMKM');
+            $table->string('courseType')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
