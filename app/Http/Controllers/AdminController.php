@@ -30,6 +30,25 @@ class AdminController extends Controller
         
         return redirect()->back()->with('success', 'Pertanyaan berhasil diupdate');
     }
+
+    public function deleteKuisioner(Request $request, string $id){
+        $question = Kuisioner::find($id);
+
+        $question->delete();
+
+        return redirect()->back()->with('success', 'Pertanyaan berhasil dihapus');
+    }
+
+    public function addKuisioner(Request $request, string $type){
+        $request->validate(['question' => 'required|string']);
+
+        Kuisioner::create([
+            'question' => $request->question,
+            'questionType' => $type
+        ]);
+
+        return redirect()->back()->with('success', 'Pertanyaan berhasil ditambahkan');
+    }
     
     public function editKuisionerType(Request $request, string $type){
         $questionType = Kuisioner::where('questionType', $type)->get();

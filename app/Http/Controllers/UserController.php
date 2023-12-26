@@ -22,10 +22,12 @@ class UserController extends Controller
     }
 
     public function kuisionerSessionOne(Request $request){
-        $question = Kuisioner::where('questionType', 'Session One')->get();
+        $kuisioner = Kuisioner::pluck('questionType')->unique()->values()->toArray();
+        $kuisionerType = $kuisioner[0];
+        $question = Kuisioner::where('questionType', $kuisionerType)->get();
         $answer = $request->session()->get('answer');
 
-        return view('kuisioner.index', compact('question', 'answer'));
+        return view('kuisioner.index', compact('question', 'answer', 'kuisioner'));
     }
 
     public function kuisionerSessionOneStore(Request $request){
@@ -43,9 +45,11 @@ class UserController extends Controller
     }
 
     public function kuisionerSessionTwo(Request $request){
-        $question = Kuisioner::where('questionType', 'Session Two')->get();
+        $kuisioner = Kuisioner::pluck('questionType')->unique()->values()->toArray();
+        $kuisionerType = $kuisioner[1];
+        $question = Kuisioner::where('questionType', $kuisionerType)->get();
         $answer = $request->session()->get('answer');
-        return view('kuisioner.question2', compact('question', 'answer'));
+        return view('kuisioner.question2', compact('question', 'answer', 'kuisioner'));
     }
 
     public function kuisionerSessionTwoStore(Request $request){
@@ -61,10 +65,12 @@ class UserController extends Controller
     }
 
     public function kuisionerSessionThree(Request $request){
-        $question = Kuisioner::where('questionType', 'Session Three')->get();
+        $kuisioner = Kuisioner::pluck('questionType')->unique()->values()->toArray();
+        $kuisionerType = $kuisioner[2];
+        $question = Kuisioner::where('questionType', $kuisionerType)->get();
         $answer = $request->session()->get('answer');
 
-        return view('kuisioner.question3', compact('question', 'answer'));
+        return view('kuisioner.question3', compact('question', 'answer', 'kuisioner'));
     }
 
     public function kuisionerSessionThreeStore(Request $request){
@@ -82,10 +88,12 @@ class UserController extends Controller
     }
 
     public function kuisionerSessionFour(Request $request){
-        $question = Kuisioner::where('questionType', 'Session Four')->get();
+        $kuisioner = Kuisioner::pluck('questionType')->unique()->values()->toArray();
+        $kuisionerType = $kuisioner[3];
+        $question = Kuisioner::where('questionType', $kuisionerType)->get();
         $answer = $request->session()->get('answer');
 
-        return view('kuisioner.question4', compact('question', 'answer'));
+        return view('kuisioner.question4', compact('question', 'answer', 'kuisioner'));
     }
 
     public function kuisionerSessionFourStore(Request $request){

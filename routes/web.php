@@ -43,7 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:admin'])->name('admin.')->prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboardAdmin');
         Route::get('/kuisioner', [AdminController::class, 'kuisioner'])->name('kuisioner');
+        Route::post('/kuisioner/add/{type}', [AdminController::class, 'addKuisioner'])->name('kuisionerAdd');
         Route::patch('/kuisioner/edit/{id}', [AdminController::class, 'editKuisioner'])->name('kuisionerEdit');
+        Route::delete('/kuisioner/delete/{id}', [AdminController::class, 'deleteKuisioner'])->name('kuisionerDelete');
         Route::patch('/kuisionerType/edit/{type}', [AdminController::class, 'editKuisionerType'])->name('kuisionerTypeEdit');
     });
 });

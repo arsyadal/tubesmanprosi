@@ -11,26 +11,25 @@
 
 <body class="min-h-screen bg-gray-400">
     <!-- navbar -->
-    <div class="navbar justify-between bg-white">
+    <div class="navbar justify-between bg-white relative">
         <div>
             <img src="{{ asset('assets/logo.png') }}" alt="" class="w-20">
         </div>
         <div class="navbar-center hidden lg:flex">
             <h1 class="text-[#133256] font-bold text-xl">Kuisioner UMKM</h1>
         </div>
-        <div class="">
-            <a href="{{ route('register') }}" class="btn btn-active btn-primary mr-5 text-white">Daftar</a>
-            <a href="{{ route('login') }}" class="btn btn">Login</a>
+        <div>
+            <img src="{{ asset('assets/logo.png') }}" alt="" class="w-20 invisible">
         </div>
     </div>
     <!-- navbar end -->
     <div class="flex flex-col gap-y-5 items-center p-5">
         <div class="w-fit bg-[#A0B9FF] p-3 rounded-xl">
             <ul class="steps">
-                <li class="step step-primary text-gray-700 font-semibold">Manajemen <br>Operasional</li>
-                <li class="step step-primary text-gray-700 font-semibold">Choose plan</li>
-                <li class="step step-primary text-gray-700 font-semibold">Purchase</li>
-                <li class="step step-primary text-gray-700 font-semibold">Receive Product</li>
+                <li class="step step-primary text-gray-700 font-semibold">{{ $kuisioner[0] }}</li>
+                <li class="step step-primary text-gray-700 font-semibold">{{ $kuisioner[1] }}</li>
+                <li class="step step-primary text-gray-700 font-semibold">{{ $kuisioner[2] }}</li>
+                <li class="step step-primary text-gray-700 font-semibold">{{ $kuisioner[3] }}</li>
             </ul>
         </div>
         <form action="{{ route('user.kuisionerSessionFourStore') }}" method="post"
@@ -61,16 +60,18 @@
             <div class="flex justify-center gap-x-5">
                 <a href="{{ route('user.kuisionerSessionThree') }}"
                     class="btn w-1/2 bg-white border-[#0F4B93] text-[#0F4B93]">Sebelumnya</a>
-                <label for="submitModal"  class="btn w-1/2 bg-[#0F4B93] text-white">Submit</label>
+                <label for="submitModal" class="btn w-1/2 bg-[#0F4B93] text-white">Submit</label>
             </div>
 
             <input type="checkbox" id="submitModal" class="modal-toggle" />
             <div class="modal" role="dialog">
                 <div class="modal-box bg-white text-gray-700">
                     <h3 class="font-bold text-lg text-center">Apakah Anda sudah yakin dengan jawaban Anda?</h3>
-                    <p class="py-4 text-center">Anda Tidak bisa mengubah jawaban Anda kembali setelah melakukan submisi.</p>
+                    <p class="py-4 text-center">Anda Tidak bisa mengubah jawaban Anda kembali setelah melakukan submisi.
+                    </p>
                     <div class="modal-action flex justify-center">
-                        <label for="submitModal" class="btn w-1/2 bg-white border-[#0F4B93] text-[#0F4B93]">Tidak</label>
+                        <label for="submitModal"
+                            class="btn w-1/2 bg-white border-[#0F4B93] text-[#0F4B93]">Tidak</label>
                         <button type="submit" class="btn w-1/2 bg-[#0F4B93] text-white">Ya</button>
                     </div>
                 </div>

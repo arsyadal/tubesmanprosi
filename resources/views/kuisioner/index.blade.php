@@ -11,26 +11,25 @@
 
 <body class="min-h-screen bg-gray-400">
     <!-- navbar -->
-    <div class="navbar justify-between bg-white">
+    <div class="navbar justify-between bg-white relative">
         <div>
             <img src="{{ asset('assets/logo.png') }}" alt="" class="w-20">
         </div>
         <div class="navbar-center hidden lg:flex">
             <h1 class="text-[#133256] font-bold text-xl">Kuisioner UMKM</h1>
         </div>
-        <div class="">
-            <a href="{{ route('register') }}" class="btn btn-active btn-primary mr-5 text-white">Daftar</a>
-            <a href="{{ route('login') }}" class="btn btn">Login</a>
+        <div>
+            <img src="{{ asset('assets/logo.png') }}" alt="" class="w-20 invisible">
         </div>
     </div>
     <!-- navbar end -->
     <div class="flex flex-col gap-y-5 items-center p-5">
         <div class="w-fit bg-[#A0B9FF] p-3 rounded-xl">
             <ul class="steps">
-                <li class="step step-primary text-gray-700 font-semibold">Manajemen <br>Operasional</li>
-                <li class="step text-gray-700 font-semibold">Choose plan</li>
-                <li class="step text-gray-700 font-semibold">Purchase</li>
-                <li class="step text-gray-700 font-semibold">Receive Product</li>
+                <li class="step step-primary text-gray-700 font-semibold">{{ $kuisioner[0] }}</li>
+                <li class="step text-gray-700 font-semibold">{{ $kuisioner[1] }}</li>
+                <li class="step text-gray-700 font-semibold">{{ $kuisioner[2] }}</li>
+                <li class="step text-gray-700 font-semibold">{{ $kuisioner[3] }}</li>
             </ul>
         </div>
         <form action="{{ route('user.kuisionerSessionOneStore') }}" method="post" class="bg-white rounded-xl p-5 w-1/2 mx-auto flex flex-col gap-y-5">

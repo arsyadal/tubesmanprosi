@@ -16,9 +16,15 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    @role('user')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    @elserole('admin')
+                    <x-nav-link :href="route('admin.dashboardAdmin')" :active="request()->routeIs('admin.dashboardAdmin')">
+                        {{ __('Home') }}
+                    </x-nav-link>
+                    @endrole
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Course') }}
                     </x-nav-link>
