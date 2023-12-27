@@ -16,8 +16,10 @@ return new class extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('course_categories')->onDelete('cascade');
             $table->string('courseName');
+            $table->string('namaPemateri');
             $table->text('deskripsi');
             $table->string('file');
+            $table->string('sertifikat');
             $table->timestamps();
         });
     }

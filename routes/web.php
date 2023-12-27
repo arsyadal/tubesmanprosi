@@ -44,7 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:admin'])->name('admin.')->prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboardAdmin');
 
-        Route::get('/course/{idCourse}', [AdminController::class, 'course'])->name('course');
+        Route::get('/course', [CourseController::class, 'index'])->name('course');
+        Route::get('/course/{idCourseCategory}', [CourseController::class, 'detail'])->name('course.detail');
+        Route::get('/course/detail/{courseId}', [CourseController::class, 'detailCourse'])->name('course.detailCourse');
+        Route::get('/course/create/{idCourseCategory}', [CourseController::class, 'create'])->name('course.create');
+        Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
 
         Route::get('/kuisioner', [AdminController::class, 'kuisioner'])->name('kuisioner');
         Route::post('/kuisioner/add/{type}', [AdminController::class, 'addKuisioner'])->name('kuisionerAdd');
