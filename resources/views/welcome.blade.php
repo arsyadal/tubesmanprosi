@@ -160,7 +160,7 @@
                 @else
                 <div class="flex items-center gap-x-5">
                     <a href="{{ route('register') }}" class="btn btn-active btn-primary mr-5">Daftar</a>
-                    <a href="{{ route('login') }}" class="btn btn">Login</a>
+                    <a href="{{ route('login') }}" class="btn">Login</a>
                 </div>
                 @endauth
             </div>
@@ -257,7 +257,7 @@
     <div class="flex justify-center mt-4 mb-4">
         <div class="card lg:card-side bg-white shadow-xl" style="margin-left: 10px; margin-right: 10px;">
             <div class="flex items-center">
-                <div class="card-body">
+                <div class="card-body text-gray-700">
                     <h2 class="card-title">Mengapa pilih LearnUMKM?</h2>
                     <ul>
                         <li>Antarmuka Pengguna yang Ramah.</li>
@@ -283,7 +283,7 @@
         <div class="card lg:card-side bg-white shadow-xl w-1/2" style="align-items: center; justify-content: center;">
             <div class="flex items-center"
                 style="height: 100%; display: flex; justify-content: center; align-items: center;">
-                <div class="card-body">
+                <div class="card-body text-gray-700">
                     <h2 class="card-title">KataUMKM</h2>
                     <div>
                         <p>"Saya sangat bersyukur bisa menggunakan aplikasi LearnUMKM ini. Sebagai pemilik usaha batik
@@ -340,7 +340,7 @@
     <!-- location -->
     <div class="flex justify-center">
         <div class="flex flex-wrap justify-between">
-            <div class="card w-96 bg-white shadow-xl mx-2">
+            <div class="card w-96 bg-white shadow-xl mx-2 text-gray-700">
                 <div class="card-body">
                     <h2 class="card-title">Bandung</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24"
@@ -354,7 +354,7 @@
                 </div>
                 <figure><img src="{{ asset('assets/Proyek Baru (6).png') }}" alt="Shoes" /></figure>
             </div>
-            <div class="card w-96 bg-white shadow-xl mx-2">
+            <div class="card w-96 bg-white shadow-xl mx-2 text-gray-700">
                 <div class="card-body">
                     <h2 class="card-title">Jakarta!</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24"
@@ -368,7 +368,7 @@
                 </div>
                 <figure><img src="{{ asset('assets/Proyek Baru (5).png') }}" alt="Shoes" /></figure>
             </div>
-            <div class="card w-96 bg-white shadow-xl mx-2">
+            <div class="card w-96 bg-white shadow-xl mx-2 text-gray-700">
                 <div class="card-body">
                     <h2 class="card-title">Bekasi!</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24"
@@ -393,7 +393,7 @@
 
         <div class="card w-3/4 white shadow-xl">
             <div class="card-body">
-                <h2 class="card-title">Event</h2>
+                <h2 class="card-title text-gray-700">Event</h2>
                 <div class="carousel w-full">
                     <div id="slide1" class="carousel-item relative w-full">
                         <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
@@ -435,7 +435,7 @@
     </div>
     <!-- event end -->
     <!-- footer -->
-    <footer class="footer p-10 bg-gray-200 text-base-content">
+    <footer class="footer p-10 bg-gray-200 text-gray-700">
         <aside>
             <img src="umkm_logo-removebg-preview.png " alt="" style="width: 50%;">
             <p>LearnUMKM Industries Ltd.<br />Providing reliable tech since 1992</p>

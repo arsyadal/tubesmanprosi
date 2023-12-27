@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Kuisioner;
 use Illuminate\Http\Request;
+use App\Models\CourseCategory;
 
 class AdminController extends Controller
 {
     public function index(){
         $allUser = User::role('user')->where('courseType', '!=', null)->count();
         $pending = User::role('user')->where('courseType', null)->count();
-        return view('admin.index', compact('allUser', 'pending'));
+        $courseCategory = CourseCategory::all();
+        return view('admin.index', compact('allUser', 'pending', 'courseCategory'));
     }
 
     public function kuisioner(){
@@ -56,5 +59,11 @@ class AdminController extends Controller
             $data->update(['questionType' => $request->questionType]);;
         }
         return redirect()->back()->with('success', 'Tipe Pertanyaan berhasil diupdate');
+    }
+
+    public function course(string $idCourse){
+        $course = Course::where('category_id', $idCourse)->get();
+        $courseCategory = CourseCategory::find($idCourse);
+        return view('admin.course.index', compact('course', 'courseCategory'));
     }
 }

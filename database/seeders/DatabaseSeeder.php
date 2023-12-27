@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\CourseCategory;
 use App\Models\Kuisioner;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -16,12 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         Role::create(['name' => 'user']);
         Role::create(['name' => 'admin']);
         User::create([
@@ -115,6 +110,22 @@ class DatabaseSeeder extends Seeder
         Kuisioner::create([
             'question' => 'Are you sure you want to',
             'questionType' => 'Session Four'
+        ]);
+
+        CourseCategory::create([
+            "name" => "GoOnline",
+            "deskripsi" => "Go Online",
+            'file' => 'kelass2.jpg',
+        ]);
+        CourseCategory::create([
+            "name" => "GoModern",
+            "deskripsi" => "Go Online",
+            'file' => 'online.jpg',
+        ]);
+        CourseCategory::create([
+            "name" => "GoGlobal",
+            "deskripsi" => "Go Online",
+            'file' => 'kelass3.avif',
         ]);
     }
 }
