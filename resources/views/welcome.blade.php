@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="{{ asset('assets/logo.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Dashboard</title>
 </head>

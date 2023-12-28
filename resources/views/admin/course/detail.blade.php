@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center">
             <h1 class="text-xl font-bold">List Course {{ $courseCategory->name }}</h1>
             <a href="{{ route('admin.course.create', $courseCategory->id) }}" class="btn flex items-center gap-x-2">
-                <p>Create Modul</p>
+                <p>Create Course</p>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round"

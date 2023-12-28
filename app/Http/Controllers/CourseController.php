@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseModul;
 use Illuminate\Http\Request;
 use App\Models\CourseCategory;
 
@@ -58,6 +59,7 @@ class CourseController extends Controller
 
     public function detailCourse(string $courseId){
         $course = Course::find($courseId);
-        return view('admin.course.detailCourse', compact('course'));
+        $modul = CourseModul::where('course_id', $course->id)->get();
+        return view('admin.course.detailCourse', compact('course', 'modul'));
     }
 }
