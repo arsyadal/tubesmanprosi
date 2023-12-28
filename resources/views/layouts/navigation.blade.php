@@ -20,18 +20,22 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('user.course')" :active="request()->routeIs('user.course')">
+                        {{ __('Course') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('user.bootcampEvent')" :active="request()->routeIs('user.bootcampEvent')">
+                        {{ __('Home') }}
+                    </x-nav-link>
                     @elserole('admin')
                     <x-nav-link :href="route('admin.dashboardAdmin')" :active="request()->routeIs('admin.dashboardAdmin')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    @endrole
                     <x-nav-link :href="route('admin.course')" :active="request()->routeIs('admin.course**')">
                         {{ __('Course') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('admin.eventBootcamp')" :active="request()->routeIs('admin.eventBootcamp**')">
                         {{ __('Event & Bootcamp') }}
                     </x-nav-link>
-                    @role('admin')
                     <x-nav-link :href="route('admin.kuisioner')" :active="request()->routeIs('admin.kuisioner')">
                         {{ __('Kuisioner') }}
                     </x-nav-link>

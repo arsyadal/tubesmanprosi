@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ModulController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EventBootcampController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::middleware(['role:user', 'kuisioner'])->name('user.')->group(function () {
+
+        Route::get('/course', [UserController::class, 'course'])->name('course');
+        Route::get('/bootcamp-event', [UserController::class, 'bootcampEvent'])->name('bootcampEvent');
+
         Route::get('/kuisioner/sessionOne', [UserController::class, 'kuisionerSessionOne'])->name('kuisionerSessionOne');
         Route::post('/kuisioner/sessionOneStore', [UserController::class, 'kuisionerSessionOneStore'])->name('kuisionerSessionOneStore');
         Route::get('/kuisioner/sessionTwo', [UserController::class, 'kuisionersessionTwo'])->name('kuisionerSessionTwo');
@@ -49,6 +55,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/course/detail/{courseId}', [CourseController::class, 'detailCourse'])->name('course.detailCourse');
         Route::get('/course/create/{idCourseCategory}', [CourseController::class, 'create'])->name('course.create');
         Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
+        
+        Route::get('/course/modul/create/{id}', [ModulController::class, 'create'])->name('modul.create');
+        Route::post('/course/modul/store', [ModulController::class, 'store'])->name('modul.store');
+        Route::get('/course/modul/question/create/{id}', [ModulController::class, 'questionCreate'])->name('modul.question.create');
+
+        Route::get('/event-bootcamp', [EventBootcampController::class, 'index'])->name('eventBootcamp');
+        Route::get('/event-bootcamp/{category}', [EventBootcampController::class, 'detail'])->name('eventBootcamp.detail');
 
         Route::get('/kuisioner', [AdminController::class, 'kuisioner'])->name('kuisioner');
         Route::post('/kuisioner/add/{type}', [AdminController::class, 'addKuisioner'])->name('kuisionerAdd');
