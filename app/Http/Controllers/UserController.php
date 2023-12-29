@@ -2,14 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Course;
 use App\Models\Kuisioner;
+use App\Models\CourseModul;
 use Illuminate\Http\Request;
+use App\Models\CourseCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function index(){
+        $courseCategory = CourseCategory::where('name', auth()->user()->courseType)->first();
+        $course = Course::where('category_id', $courseCategory->id)->get();
+        return view('user.index', compact('courseCategory', 'course'));
+    }
+
+    public function course(){
+        $courseCategory = CourseCategory::where('name', auth()->user()->courseType)->first();
+        $course = Course::where('category_id', $courseCategory->id)->get();
+        return view('user.course', compact('courseCategory', 'course'));
+    }
+
+    public function courseModul(string $id){
+        $course = Course::find($id);
+        $courseCategory = CourseCategory::find($course->category_id);
+        $modul = CourseModul::where('course_id', $course->id)->get();
+        $peserta = User::where('courseType', $courseCategory->name)->get();
+        $videoCount = 0;
+        foreach($modul as $data){
+            foreach($data->modulQuestions as $value){
+                if($value->modulType == 'Video'){
+                    $videoCount++;
+                }  
+            }
+        }
+        return view('user.courseModul', compact('course', 'courseCategory', 'modul', 'peserta', 'videoCount'));
+    }
+
+    public function bootcampEvent(){
+        return view('user.bootcampEvent');
+    }
+
     public function goOnline(){
         return view('goOnline');
     }
@@ -119,6 +155,6 @@ class UserController extends Controller
             $user->update(['courseType' => 'GoModern']);
         }
         $request->session()->forget('answer');
-        return redirect()->route('dashboard')->with('success',"Your Course Type is $user->courseType");
+        return redirect()->route('user.index')->with('success',"Your Course Type is $user->courseType");
     }
 }

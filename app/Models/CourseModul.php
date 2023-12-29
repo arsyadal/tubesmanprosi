@@ -9,4 +9,8 @@ class CourseModul extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function modulQuestions(){
+        return $this->hasMany(ModulQuestion::class, 'modul_id');
+    }
 }

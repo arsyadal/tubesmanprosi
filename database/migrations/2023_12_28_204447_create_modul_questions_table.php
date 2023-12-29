@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('modul_questions', function (Blueprint $table) {
-            $table->id();
+            $table->id(); 
+            $table->bigInteger('modul_id')->unsigned();
+            $table->foreign('modul_id')->references('id')->on('course_moduls')->onDelete('cascade');
             $table->string('modulType');
-            $table->string('presentationMateri')->nullable();
-            $table->string('materiPDF')->nullable();
-            $table->string('exerciseTugas')->nullable();
-            $table->string('videoMateri')->nullable();
+            $table->string('materi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }

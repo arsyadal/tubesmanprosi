@@ -60,6 +60,7 @@ class CourseController extends Controller
     public function detailCourse(string $courseId){
         $course = Course::find($courseId);
         $modul = CourseModul::where('course_id', $course->id)->get();
-        return view('admin.course.detailCourse', compact('course', 'modul'));
+        $courseCategory = CourseCategory::find($course->category_id);
+        return view('admin.course.detailCourse', compact('course', 'modul', 'courseCategory'));
     }
 }

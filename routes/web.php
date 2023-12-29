@@ -23,9 +23,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'kuisioner'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified', 'kuisioner'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,8 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::middleware(['role:user', 'kuisioner'])->name('user.')->group(function () {
+        Route::get('/dashboard', [UserController::class, 'index'])->name('index');
 
         Route::get('/course', [UserController::class, 'course'])->name('course');
+        Route::get('/course/{id}', [UserController::class, 'courseModul'])->name('courseModul');
+
         Route::get('/bootcamp-event', [UserController::class, 'bootcampEvent'])->name('bootcampEvent');
 
         Route::get('/kuisioner/sessionOne', [UserController::class, 'kuisionerSessionOne'])->name('kuisionerSessionOne');
@@ -59,6 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/course/modul/create/{id}', [ModulController::class, 'create'])->name('modul.create');
         Route::post('/course/modul/store', [ModulController::class, 'store'])->name('modul.store');
         Route::get('/course/modul/question/create/{id}', [ModulController::class, 'questionCreate'])->name('modul.question.create');
+        Route::post('/course/modul/question/store', [ModulController::class, 'questionStore'])->name('modul.question.store');
 
         Route::get('/event-bootcamp', [EventBootcampController::class, 'index'])->name('eventBootcamp');
         Route::get('/event-bootcamp/{category}', [EventBootcampController::class, 'detail'])->name('eventBootcamp.detail');

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ModulQuestion extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'modul_id',
+        'modulType',
+        'materi',
+        'deskripsi',
+    ];
+
+    public function courseModuls(){
+        return $this->belongsTo(CourseModul::class, 'modul_id');
+    }
 }
