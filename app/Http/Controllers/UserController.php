@@ -8,6 +8,7 @@ use App\Models\Kuisioner;
 use App\Models\CourseModul;
 use Illuminate\Http\Request;
 use App\Models\CourseCategory;
+use App\Models\ModulQuestion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -156,5 +157,14 @@ class UserController extends Controller
         }
         $request->session()->forget('answer');
         return redirect()->route('user.index')->with('success',"Your Course Type is $user->courseType");
+    }
+
+    public function activities(string $id){
+        $activities = ModulQuestion::find($id);
+        $modul = CourseModul::find($activities->modul_id);
+        $course = Course::find($modul->course_id);
+        $courseCategory = CourseCategory::find($course->category_id);
+
+        return view('user.activities', compact('activities', 'course', 'courseCategory', 'modul'));
     }
 }

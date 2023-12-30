@@ -37,7 +37,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/course', [UserController::class, 'course'])->name('course');
         Route::get('/course/{id}', [UserController::class, 'courseModul'])->name('courseModul');
-
+        
+        Route::get('/course/activities/{id}', [UserController::class, 'activities'])->name('activities');
+        
         Route::get('/bootcamp-event', [UserController::class, 'bootcampEvent'])->name('bootcampEvent');
 
         Route::get('/kuisioner/sessionOne', [UserController::class, 'kuisionerSessionOne'])->name('kuisionerSessionOne');

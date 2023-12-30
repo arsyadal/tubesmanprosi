@@ -85,7 +85,7 @@
                 <div class="flex flex-col gap-y-3 mt-5">
                     @foreach($data->modulQuestions as $question)
                     <div class="flex justify-between items-center px-10">
-                        <div class="flex items-center gap-x-2">
+                        <a href="{{ route('user.activities', $question->id) }}" class="flex items-center gap-x-2">
                             @if($question->modulType == "Presentation Materi")
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
@@ -114,7 +114,7 @@
                             </svg>
                             @endif
                             <p>{{ $question->modulType }} {{ $data->modul_name }}</p>
-                        </div>
+                        </a>
                         <div class="flex items-center gap-x-2">
                             <input type="checkbox" class="checkbox border-2" />
                         </div>

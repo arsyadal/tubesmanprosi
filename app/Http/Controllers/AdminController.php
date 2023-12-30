@@ -23,7 +23,6 @@ class AdminController extends Controller
         foreach($kuisioner as $key => $data){
             $kuisionerData['kuisioner' . ($key + 1)] = Kuisioner::where('questionType', $data)->get();
         }
-        // dd($kuisionerData);
         return view('admin.kuisioner', compact('kuisionerData'));
     }
 
@@ -34,7 +33,7 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Pertanyaan berhasil diupdate');
     }
 
-    public function deleteKuisioner(Request $request, string $id){
+    public function deleteKuisioner(string $id){
         $question = Kuisioner::find($id);
 
         $question->delete();
