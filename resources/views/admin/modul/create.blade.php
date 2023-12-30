@@ -2,7 +2,7 @@
     <div class="py-12 px-10 text-gray-700">
         <h1 class="text-xl font-bold">Tambah Modul</h1>
         <p><a href="{{ route('admin.course') }}">Course</a> / <a href="{{ route('admin.course.detail', $courseCategory->id)  }}">
-            {{ $courseCategory->name }}</a> / <a href="{{ route('admin.course.detailCourse', $course->id) }}">{{ $course->courseName }}</a></p>
+            {{ $courseCategory->name }}</a> / <a href="{{ route('admin.course.detailCourse', $course->id) }}">{{ $course->courseName }}</a> / Tambah Modul</p>
         <form action="{{ route('admin.modul.store') }}" method="post" enctype="multipart/form-data" class="rounded-lg bg-[#133256] p-5 mt-5">
             @csrf
             <div>
@@ -12,26 +12,6 @@
                 <x-text-input id="namaModul" class="block mt-1 w-full" type="text" name="namaModul" :value="old('namaModul')" required autofocus />
                 <x-input-error :messages="$errors->get('namaModul')" class="mt-2" />
             </div>
-            <!-- <div class="mt-4">
-                <x-input-label for="presentasionMateri" :value="__('Presentastion Materi')" class="text-white"/>
-                <x-text-input id="presentasionMateri" class="block mt-1 w-full" type="text" name="presentasionMateri" :value="old('presentasionMateri')" required />
-                <x-input-error :messages="$errors->get('presentasionMateri')" class="mt-2" />
-            </div> -->
-            <!-- <div class="mt-4">
-                <x-input-label for="materiPDF" :value="__('Materi PDF')" class="text-white"/>
-                <input name="materiPDF" class="bg-white p-2 block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="file" placeholder="Materi PDF" required />
-                <x-input-error :messages="$errors->get('materiPDF')" class="mt-2" />
-            </div>
-            <div class="mt-4">
-                <x-input-label for="exerciseTugas" :value="__('Exercise/Tugas')" class="text-white"/>
-                <x-text-input type="exerciseTugas" name="exerciseTugas" class="block mt-1 w-full" type="text" required />
-                <x-input-error :messages="$errors->get('exerciseTugas')" class="mt-2" />
-            </div>
-            <div class="mt-4">
-                <x-input-label for="videoMateri" :value="__('Video Materi')" class="text-white"/>
-                <x-text-input type="text" name="videoMateri" class="block mt-1 w-full" required/>
-                <x-input-error :messages="$errors->get('videoMateri')" class="mt-2" />
-            </div> -->
             <div class="mt-4">
                 <x-input-label for="forum" :value="__('Forum')" class="text-white"/>
                 <x-text-input type="text" name="forum" class="block mt-1 w-full" required />

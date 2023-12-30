@@ -13,4 +13,13 @@ class CourseModul extends Model
     public function modulQuestions(){
         return $this->hasMany(ModulQuestion::class, 'modul_id');
     }
+
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($modul) {
+            $modul->modulQuestions()->each(function($modulQuestion) {
+                $modulQuestion->delete();
+            });
+        });
+    }
 }

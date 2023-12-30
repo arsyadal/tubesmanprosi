@@ -1,7 +1,6 @@
 <x-app-layout>
     <div class="py-12 px-10 text-gray-700">
         <div class="flex justify-between items-center">
-
             <div class="flex items-center font-bold text-xl">
                 <p>{{ $course->courseName }} · </p>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#FFB961" viewBox="0 0 24 24" stroke-width="0"
@@ -13,12 +12,34 @@
             </div>
             <div>
                 <a href="{{ route('admin.modul.create', $course->id) }}"
-                class="btn bg-[#AC8039] border-0 text-white">Tambah Modul</a>
-                <a href="" class="btn bg-[#AC8039] border-0 text-white">Edit</a>
+                    class="btn bg-[#AC8039] border-0 text-white">Tambah Modul</a>
+                <a href="{{ route('admin.course.edit', $course->id) }}"
+                    class="btn bg-[#AC8039] border-0 text-white">Edit</a>
+                <label for="deleteModal" class="btn btn-error text-white">Delete Course</label>
             </div>
         </div>
-        <p><a href="{{ route('admin.course') }}">Course</a> / <a href="{{ route('admin.course.detail', $courseCategory->id)  }}">
-            {{ $courseCategory->name }}</a> / <a href="{{ route('admin.course.detailCourse', $course->id) }}">{{ $course->courseName }}</a></p>
+
+        <!-- Delete Modal -->
+        <input type="checkbox" id="deleteModal" class="modal-toggle" />
+        <div class="modal" role="dialog">
+            <div class="modal-box bg-white">
+                <h3 class="font-bold text-lg text-center">Are you sure you want to delete this course?</h3>
+                <p class="text-center">The other modul and acitivaties will be automatically deleted too!</p>
+                <form action="{{ route('admin.course.delete', $course->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <div class="modal-action flex justify-center gap-x-5">
+                        <label for="deleteModal" class="btn">Close!</label>
+                        <button class="btn btn-error text-white" type="submit">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <p><a href="{{ route('admin.course') }}">Course</a> / <a
+                href="{{ route('admin.course.detail', $courseCategory->id)  }}">
+                {{ $courseCategory->name }}</a> / <a
+                href="{{ route('admin.course.detailCourse', $course->id) }}">{{ $course->courseName }}</a></p>
         <div class="bg-white rounded-md w-full mt-5">
             <div class="w-full h-44 bg-center bg-contain bg-no-repeat"
                 style="background-image: url('{{ asset('storage/coursephoto/'. $course->file) }}')"></div>
@@ -54,14 +75,69 @@
             <div class="bg-white shadow-xl rounded-lg p-5 w-1/2">
                 <div class="flex items-center gap-x-5">
                     <h1 class="text-xl font-bold text-gray-700">{{ $data->modul_name }}</h1>
-                    <a href="{{ route('admin.modul.question.create', $data->id) }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-8 h-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                        </svg>
-                    </a>
+                    <div class="flex items-center gap-x-1">
+                        <label for="editModal" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                            </svg>
+                        </label>
+
+                        <!-- Edit Modul Modal -->
+                        <input type="checkbox" id="editModal" class="modal-toggle" />
+                        <div class="modal" role="dialog">
+                            <div class="modal-box bg-white">
+                                <h3 class="font-bold text-lg text-center">Edit Modul!</h3>
+                                <form action="{{ route('admin.modul.update', $data->id) }}" method="post" class="mt-2">
+                                    @csrf
+                                    <input type="text" name="modul_name" value="{{ $data->modul_name }}"
+                                        placeholder="Type here" class="input input-bordered border-2 w-full bg-white" />
+                                    <div class="modal-action">
+                                        <label for="editModal" class="btn">Close!</label>
+                                        <button class="btn btn-warning text-white" type="submit">Edit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <a href="{{ route('admin.modul.question.create', $data->id) }}">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </a>
+                        <label for="deleteModalModul" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                            </svg>
+                        </label>
+
+                        <!-- Delete Modul Modal -->
+                        <input type="checkbox" id="deleteModalModul" class="modal-toggle" />
+                        <div class="modal" role="dialog">
+                            <div class="modal-box bg-white">
+                                <h3 class="font-bold text-lg text-center">Are you sure you want to delete this modul?
+                                </h3>
+                                <p class="font-medium text-center">The other activities will be deleted too</p>
+                                <form action="{{ route('admin.modul.delete', $data->id) }}" method="post" class="mt-2">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="modal-action flex items-center justify-center gap-x-5">
+                                        <label for="deleteModalModul" class="btn">Close!</label>
+                                        <button class="btn btn-error text-white" type="submit">Delete Modul</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="flex flex-col gap-y-3 mt-5">
                     @foreach($data->modulQuestions as $question)
                     <div class="flex justify-between items-center px-10">
@@ -96,17 +172,36 @@
                             <p>{{ $question->modulType }} {{ $data->modul_name }}</p>
                         </div>
                         <div class="flex items-center gap-x-2">
+                            <label for="deleteModalActivities{{ $question->id }}" class="cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                            </svg>
+                        </label>
+                            <a href="{{ route('admin.modul.question.edit', $question->id) }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                </svg>
+                            </a>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                            </svg>
+                            <!-- Delete Modal -->
+                            <input type="checkbox" id="deleteModalActivities{{ $question->id }}" class="modal-toggle" />
+                            <div class="modal" role="dialog">
+                                <div class="modal-box bg-white">
+                                    <h3 class="font-bold text-lg text-center">Are you sure you want to delete this activities?</h3>
+                                    <form action="{{ route('admin.modul.question.delete', $question->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <div class="modal-action flex justify-center gap-x-5">
+                                            <label for="deleteModalActivities{{ $question->id }}" class="btn">Close!</label>
+                                            <button class="btn btn-error text-white" type="submit">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
