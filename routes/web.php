@@ -7,7 +7,7 @@ use App\Http\Controllers\ModulController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventBootcampController;
-
+    
 /*
 |--------------------------------------------------------------------------
 | Web Routes
