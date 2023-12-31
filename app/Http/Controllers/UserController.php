@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Kuisioner;
+use App\Models\Activities;
 use App\Models\CourseModul;
 use Illuminate\Http\Request;
-use App\Models\CourseCategory;
 use App\Models\ModulQuestion;
+use App\Models\CourseCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -18,12 +19,50 @@ class UserController extends Controller
     public function index(){
         $courseCategory = CourseCategory::where('name', auth()->user()->courseType)->first();
         $course = Course::where('category_id', $courseCategory->id)->get();
-        return view('user.index', compact('courseCategory', 'course'));
+        $categoryValue = 0;
+        $categoryActivities = 0;
+        foreach($course as $data){
+            $data->checked = 0;
+            $data->allActivities = 0;
+            foreach($data->coursemoduls as $value){
+                foreach($value->modulQuestions as $activities){
+                    $activities = Activities::where('user_id', auth()->user()->id)
+                    ->where('modul_questions_id', $activities->id)->first();
+                    if($activities){
+                        $data->checked++;
+                    }
+                    $data->allActivities++;
+                }
+            }
+            $data->progress = ($data->checked / $data->allActivities) * 100;
+            $categoryValue+= $data->progress;
+            $categoryActivities++;
+        }
+
+        $categoryProgress = $categoryValue / $categoryActivities;
+
+        return view('user.index', compact('courseCategory', 'course', 'categoryProgress'));
     }
 
     public function course(){
         $courseCategory = CourseCategory::where('name', auth()->user()->courseType)->first();
         $course = Course::where('category_id', $courseCategory->id)->get();
+        foreach($course as $data){
+            $data->checked = 0;
+            $data->allActivities = 0;
+            foreach($data->coursemoduls as $value){
+                foreach($value->modulQuestions as $activities){
+                    $activities = Activities::where('user_id', auth()->user()->id)
+                    ->where('modul_questions_id', $activities->id)->first();
+                    if($activities){
+                        $data->checked++;
+                    }
+                    $data->allActivities++;
+                }
+            }
+            $data->progress = ($data->checked / $data->allActivities) * 100;
+        }
+
         return view('user.course', compact('courseCategory', 'course'));
     }
 
@@ -33,14 +72,26 @@ class UserController extends Controller
         $modul = CourseModul::where('course_id', $course->id)->get();
         $peserta = User::where('courseType', $courseCategory->name)->get();
         $videoCount = 0;
+        $checked = 0;
+        $totalActivities = 0;
         foreach($modul as $data){
             foreach($data->modulQuestions as $value){
+                $activities = Activities::where('user_id', auth()->user()->id)
+                ->where('modul_questions_id', $value->id)->first();
+                $value->progress = "unchecked";
+                if($activities){
+                    $value->progress = "checked";
+                    $checked++;
+                }
+                $totalActivities++;
                 if($value->modulType == 'Video'){
                     $videoCount++;
-                }  
+                }
             }
         }
-        return view('user.courseModul', compact('course', 'courseCategory', 'modul', 'peserta', 'videoCount'));
+        $progressCourse = ($checked / $totalActivities) * 100;
+
+        return view('user.courseModul', compact('course', 'courseCategory', 'modul', 'peserta', 'videoCount', 'progressCourse'));
     }
 
     public function bootcampEvent(){
@@ -166,5 +217,22 @@ class UserController extends Controller
         $courseCategory = CourseCategory::find($course->category_id);
 
         return view('user.activities', compact('activities', 'course', 'courseCategory', 'modul'));
+    }
+
+    public function activitiesProgress(string $id){
+        $activities = ModulQuestion::find($id);
+        $modul = CourseModul::find($activities->modul_id);
+        $course = Course::find($modul->course_id);
+        $courseCategory = CourseCategory::find($course->category_id);
+
+        Activities::create([
+            'user_id' => auth()->user()->id,
+            'modul_questions_id' => $activities->id,
+            'modul_id' => $modul->id,
+            'course_id' => $course->id,
+            'category_id' => $courseCategory->id,
+        ]);
+
+        return redirect()->back()->with('success', 'Your progress has been saved');
     }
 }

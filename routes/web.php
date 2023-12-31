@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/course/{id}', [UserController::class, 'courseModul'])->name('courseModul');
         
         Route::get('/course/activities/{id}', [UserController::class, 'activities'])->name('activities');
+        Route::post('/course/activities/progress/{id}', [UserController::class, 'activitiesProgress'])->name('activitiesProgress');
         
         Route::get('/bootcamp-event', [UserController::class, 'bootcampEvent'])->name('bootcampEvent');
 

@@ -13,7 +13,8 @@
                     @if($fileExtension == 'pdf') 
                         <embed src="{{ asset('storage/modulMateri/'. $activities->materi) }}" type="application/pdf" class="w-full h-96">
                     @elseif($fileExtension == 'mp4') 
-                    <video src="{{ asset('storage/modulMateri/'. $activities->materi) }}" type="video/webm">
+                    <video controls class="w-full min-h-[96px]">
+                        <source src="{{ asset('storage/modulMateri/'. $activities->materi) }}" type="video/mp4">
                         Browsermu tidak mendukung tag ini
                     </video>
                     @else
