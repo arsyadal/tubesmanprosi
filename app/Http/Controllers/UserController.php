@@ -15,14 +15,20 @@ use App\Models\ModulQuestion;
 use App\Models\CourseCategory;
 use App\Models\BootcampAudience;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $courseCategory = CourseCategory::where('name', auth()->user()->courseType)->first();
-        $course = Course::where('category_id', $courseCategory->id)->get();
+        if($request->has('query')){
+            $searchTerm = $request->input('query');
+            $course = Course::where('category_id', $courseCategory->id)->where('courseName', 'LIKE', '%' . $searchTerm . '%')->get();
+        } else{
+            $course = Course::where('category_id', $courseCategory->id)->get();
+        }
+        $eventAttend = EventAudience::where('user_id', auth()->user()->id)->get();
+        $bootcampAttend = BootcampAudience::where('user_id', auth()->user()->id)->get();
         $events = EventAudience::where('user_id', auth()->user()->id)->get();
         $bootcamps = BootcampAudience::where('user_id', auth()->user()->id)->get();
         $categoryValue = 0;
@@ -49,7 +55,7 @@ class UserController extends Controller
             $categoryProgress = $categoryValue / $categoryActivities;
         }
 
-        return view('user.index', compact('courseCategory', 'course', 'categoryProgress', 'events', 'bootcamps'));
+        return view('user.index', compact('courseCategory', 'course', 'categoryProgress', 'events', 'bootcamps', 'eventAttend', 'bootcampAttend'));
     }
 
     public function course(){

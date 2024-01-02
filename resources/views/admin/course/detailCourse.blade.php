@@ -76,7 +76,7 @@
                 <div class="flex items-center gap-x-5">
                     <h1 class="text-xl font-bold text-gray-700">{{ $data->modul_name }}</h1>
                     <div class="flex items-center gap-x-1">
-                        <label for="editModal" class="cursor-pointer">
+                        <label for="editModal{{ $data->id }}" class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-8 h-8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -85,7 +85,7 @@
                         </label>
 
                         <!-- Edit Modul Modal -->
-                        <input type="checkbox" id="editModal" class="modal-toggle" />
+                        <input type="checkbox" id="editModal{{ $data->id }}" class="modal-toggle" />
                         <div class="modal" role="dialog">
                             <div class="modal-box bg-white">
                                 <h3 class="font-bold text-lg text-center">Edit Modul!</h3>
@@ -94,7 +94,7 @@
                                     <input type="text" name="modul_name" value="{{ $data->modul_name }}"
                                         placeholder="Type here" class="input input-bordered border-2 w-full bg-white" />
                                     <div class="modal-action">
-                                        <label for="editModal" class="btn">Close!</label>
+                                        <label for="editModal{{ $data->id }}" class="btn">Close!</label>
                                         <button class="btn btn-warning text-white" type="submit">Edit</button>
                                     </div>
                                 </form>
@@ -110,7 +110,7 @@
                                     d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
                         </a>
-                        <label for="deleteModalModul" class="cursor-pointer">
+                        <label for="deleteModalModul{{ $data->id }}" class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-8 h-8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -119,7 +119,7 @@
                         </label>
 
                         <!-- Delete Modul Modal -->
-                        <input type="checkbox" id="deleteModalModul" class="modal-toggle" />
+                        <input type="checkbox" id="deleteModalModul{{ $data->id }}" class="modal-toggle" />
                         <div class="modal" role="dialog">
                             <div class="modal-box bg-white">
                                 <h3 class="font-bold text-lg text-center">Are you sure you want to delete this modul?
@@ -129,7 +129,7 @@
                                     @csrf
                                     @method('delete')
                                     <div class="modal-action flex items-center justify-center gap-x-5">
-                                        <label for="deleteModalModul" class="btn">Close!</label>
+                                        <label for="deleteModalModul{{ $data->id }}" class="btn">Close!</label>
                                         <button class="btn btn-error text-white" type="submit">Delete Modul</button>
                                     </div>
                                 </form>

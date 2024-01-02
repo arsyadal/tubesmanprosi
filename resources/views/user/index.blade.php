@@ -18,22 +18,48 @@
                             {{$categoryProgress}}%</div>
                     </div>
                     <div class="bg-white p-5 shadow-sm rounded-lg text-gray-700 mt-5">
-                        <h1 class="font-bold text-xl">Timeline</h1>
+                        <h1 class="font-bold text-xl">Timeline Event & Bootcamp</h1>
                         <hr>
+                        <div class="flex flex-col gap-y-4 mt-2">
+                            @foreach($eventAttend as $event)
+                            <div class="w-full flex items-center gap-x-3">
+                                <div class="w-16 h-16 rounded-full bg-center bg-cover bg-no-repeat" style="background-image: url('{{ asset('storage/eventFoto/'. $event->events->foto) }}')">
+                                </div>
+                                <div>
+                                    <p>{{ $event->events->namaEvent }}</p>
+                                    <p>{{ $event->events->created_at->format('l, j F Y') }}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                            @foreach($bootcampAttend as $bootcamp)
+                            <div class="w-full flex items-center gap-x-3">
+                                <div class="w-16 h-16 rounded-full bg-center bg-cover bg-no-repeat" style="background-image: url('{{ asset('storage/bootcampFoto/'. $bootcamp->bootcamps->foto) }}')">
+                                </div>
+                                <div>
+                                    <p>{{ $bootcamp->bootcamps->namaBootcamp }}</p>
+                                    <p>{{ $bootcamp->bootcamps->created_at->format('l, j F Y') }}</p>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="w-4/6">
                     <div class="bg-[#00164E] p-5 shadow-sm rounded-lg">
                         <h1 class="font-bold text-xl">Courses</h1>
                         <p>Berikut List Course yang akan dipelajari!</p>
-                        <div class="flex items-center w-full bg-[#DCE1FF] rounded-md px-2 mt-2">
-                            <input type="text" class="bg-transparent w-full border-0 focus:ring-0 text-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="black" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-                        </div>
+                        <form action="{{ route('user.indexQuery') }}"
+                            class="flex items-center w-full bg-[#DCE1FF] rounded-md px-2 mt-2">
+                            <input type="text" name="query"
+                                class="bg-transparent w-full border-0 focus:ring-0 text-black">
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="black" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                            </button>
+                        </form>
                         <div class="grid grid-cols-1 gap-y-3 mt-4">
                             @foreach($course as $data)
                             <div class="card card-side bg-base-100 shadow-xl rounded-2xl">

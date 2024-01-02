@@ -14,11 +14,13 @@ class CourseController extends Controller
         $courseCategory = CourseCategory::all();
         return view('admin.course.index', compact('courseCategory'));
     }
+
     public function detail(string $idCourseCategory){
         $course = Course::where('category_id', $idCourseCategory)->get();
         $courseCategory = CourseCategory::find($idCourseCategory);
         return view('admin.course.detail', compact('course', 'courseCategory'));
     }
+    
     public function create(string $idCourseCategory){
         $courseCategory = CourseCategory::find($idCourseCategory);
         return view('admin.course.create', compact('courseCategory'));

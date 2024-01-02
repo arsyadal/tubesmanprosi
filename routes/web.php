@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     
     Route::middleware(['role:user', 'kuisioner'])->name('user.')->group(function () {
         Route::get('/dashboard', [UserController::class, 'index'])->name('index');
+        Route::post('/dashboard', [UserController::class, 'index'])->name('indexQuery');
 
         Route::get('/course', [UserController::class, 'course'])->name('course');
         Route::get('/course/{id}', [UserController::class, 'courseModul'])->name('courseModul');
