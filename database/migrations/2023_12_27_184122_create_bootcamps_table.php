@@ -16,12 +16,15 @@ return new class extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('course_categories')->onDelete('cascade');
             $table->string('namaBootcamp');
-            $table->string('prospekKarier');
+            $table->text('prospekKarier');
             $table->text('benefitBootcamp');
-            $table->string('kurikulum_silabus');
+            $table->text('kurikulum_silabus');
             $table->text('sistemBelajar');
+            $table->date('tanggal');
+            $table->integer('harga');
             $table->string('faq');
             $table->string('forum');
+            $table->string('foto');
             $table->timestamps();
         });
     }

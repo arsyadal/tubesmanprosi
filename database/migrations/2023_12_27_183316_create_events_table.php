@@ -20,7 +20,8 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->date('tanggal');
             $table->integer('harga');
-            $table->string('tempat/link');
+            $table->string('tempatLink');
+            $table->string('foto');
             $table->timestamps();
         });
     }

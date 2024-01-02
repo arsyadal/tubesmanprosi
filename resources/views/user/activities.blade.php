@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="py-12 px-10 text-gray-700">
-        <p class="text-gray-700"><a href="">{{ $courseCategory->name }}</a> / <a href="">{{ $course->courseName }}</a> /
+        <p class="text-gray-700"><a href="{{ route('user.course', $courseCategory->id) }}">{{ $courseCategory->name }}</a> / <a href="{{ route('user.courseModul', $course->id) }}">{{ $course->courseName }}</a> /
             <a href="">{{ $modul->modul_name }}</a> / Activities</p>
         <div class="flex gap-x-5 mt-4">
             <div class="w-4/6">

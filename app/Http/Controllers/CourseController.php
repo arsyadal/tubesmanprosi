@@ -29,7 +29,7 @@ class CourseController extends Controller
             'category_id' => 'required',
             'courseName' => 'required|string|max:255',
             'namaPemateri' => 'required|string|max:255',
-            'deskripsi' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
             'file' => 'required|mimes:jpg,jpeg,png,gif,svg,ico',
             'sertifikat' => 'required|mimes:jpg,jpeg,png,gif,svg,ico',
         ]);
@@ -69,7 +69,7 @@ class CourseController extends Controller
             'category_id' => 'required',
             'courseName' => 'required|string|max:255',
             'namaPemateri' => 'required|string|max:255',
-            'deskripsi' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
             'file' => 'mimes:jpg,jpeg,png,gif,svg,ico',
             'sertifikat' => 'mimes:jpg,jpeg,png,gif,svg,ico',
         ]);

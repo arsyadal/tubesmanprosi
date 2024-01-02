@@ -61,17 +61,21 @@
         </div>
         <div class="flex justify-center items-center gap-x-5 mt-5">
             <progress class="progress progress-info " value="{{ $progressCourse }}" max="100"></progress>
-            <label for="sertifikatModal" class="mx-auto btn bg-[#AC8039] text-white border-0">Unduh Sertikat</label>
+            @if($progressCourse == 100)
+            <a download href="{{ asset('storage/sertifikatcourse/' . $course->sertifikat) }}" class="mx-auto btn bg-[#AC8039] text-white border-0">Unduh Sertikat</a href="">
+            @else
+            <label class="mx-auto btn bg-[#AC8039] text-white border-0">Unduh Sertikat</label>
+            @endif
         </div>
 
         <!-- Sertifikat Modal -->
-        <input type="checkbox" id="sertifikatModal" class="modal-toggle" />
+        <!-- <input type="checkbox" id="sertifikatModal" class="modal-toggle" />
         <div class="modal" role="dialog">
             <div class="modal-box bg-white">
                 <img src="{{ asset('storage/sertifikatcourse/' . $course->sertifikat) }}" alt="Sertifikat">
             </div>
             <label class="modal-backdrop" for="sertifikatModal">Close</label>
-        </div>
+        </div> -->
 
         <div class="mt-5 text-center font-semibold">
             {{ $course->deskripsi }}

@@ -65,4 +65,12 @@ class AdminController extends Controller
         $courseCategory = CourseCategory::find($idCourse);
         return view('admin.course.index', compact('course', 'courseCategory'));
     }
+
+    public function umkmlist(){
+        $umkmlist = User::role('user')->get();
+        $goModern = User::where('courseType', 'goModern')->get();
+        $goOnline = User::where('courseType', 'goOnline')->get();
+        $goGlobal = User::where('courseType', 'goGlobal')->get();
+        return view('admin.umkmlist', compact('umkmlist', 'goModern', 'goOnline', 'goGlobal'));
+    }
 }

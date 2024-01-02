@@ -60,7 +60,8 @@
                         <x-nav-link :href="route('user.course')" :active="request()->routeIs('user.course')">
                             {{ __('Course') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('user.bootcampEvent')" :active="request()->routeIs('user.bootcampEvent')">
+                        <x-nav-link :href="route('user.bootcampEvent')"
+                            :active="request()->routeIs('user.bootcampEvent')">
                             {{ __('Event & Bootcamp') }}
                         </x-nav-link>
                     </div>
@@ -104,8 +105,8 @@
                     </x-dropdown>
                     @else
                     <div class="flex items-center">
-                        <a href="{{ route('register') }}" class="btn btn-active btn-primary mr-5">Daftar</a>
-                        <a href="{{ route('login') }}" class="btn btn">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-active btn-primary text-white mr-5">Daftar</a>
+                        <a href="{{ route('login') }}" class="btn text-white">Login</a>
                     </div>
                     @endauth
                 </div>
@@ -177,7 +178,7 @@
                 <p class="py-6 text-gray-600">Tingkatkan keahlianmu dengan berbagai modul pelatihan UMKM, konsultasi
                     dengan pakar, dan pahami kategori potensi bisnismu melalui penilaian scoring assesment naik kelas.
                 </p>
-                <a href="{{ route('register') }}" class="btn btn-primary">Daftar Sekarang</a>
+                <a href="{{ route('register') }}" class="btn btn-primary text-white">Daftar Sekarang</a>
             </div>
             <img src="{{ asset('assets/img1.jpg') }}" class="max-w-sm rounded-lg shadow-2xl" />
         </div>
@@ -236,7 +237,7 @@
                 <h2 class="card-title">GoOnline</h2>
                 <p></p>
                 <div class="card-actions justify-end">
-                    <a href="{{ route('goOnline') }}" claas="btn btn-primary">Selengkapnya</a>
+                    <a href="{{ route('goOnline') }}" class="btn btn-primary">Selengkapnya</a>
                 </div>
             </div>
         </div>
@@ -301,40 +302,38 @@
                 </div>
                 <figure class="mb-3 w-96">
                     <div class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
-                        <div id="slide1" class="carousel-item relative w-full">
+                        <div id="slidekata1" class="carousel-item relative w-full">
                             <img src="https://daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg"
                                 class="rounded-box" />
                             <div
                                 class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide4" class="btn btn-circle">❮</a>
-                                <a href="#slide2" class="btn btn-circle">❯</a>
+                                <a href="#slidekata3" class="btn btn-circle">❮</a>
+                                <a href="#slidekata2" class="btn btn-circle">❯</a>
                             </div>
                         </div>
-                        <div id="slide2" class="carousel-item relative w-full">
+                        <div id="slidekata2" class="carousel-item relative w-full">
                             <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg"
                                 class="rounded-box" />
                             <div
                                 class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide1" class="btn btn-circle">❮</a>
-                                <a href="#slide3" class="btn btn-circle">❯</a>
+                                <a href="#slidekata1" class="btn btn-circle">❮</a>
+                                <a href="#slidekata3" class="btn btn-circle">❯</a>
                             </div>
                         </div>
 
-                        <div id="slide3" class="carousel-item relative w-full">
+                        <div id="slidekata3" class="carousel-item relative w-full">
                             <img src="https://daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg"
                                 class="rounded-box" />
                             <div
                                 class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                <a href="#slide2" class="btn btn-circle">❮</a>
-                                <a href="#slide4" class="btn btn-circle">❯</a>
+                                <a href="#slidekata2" class="btn btn-circle">❮</a>
+                                <a href="#slidekata1" class="btn btn-circle">❯</a>
                             </div>
-
+                        </div>
+                    </div>
                 </figure>
-
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <!-- kataUMKM end -->
 
@@ -351,7 +350,7 @@
                         <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                         <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <p>Dikelilingi oleh perbukitan yang menghijau, Bandung menawarkan pesona alam dan kekayaan budaya yang memikat.</p>
                 </div>
                 <figure><img src="{{ asset('assets/Proyek Baru (6).png') }}" alt="Shoes" /></figure>
             </div>
@@ -365,7 +364,7 @@
                         <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                         <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <p>Sebagai pusat bisnis dan politik Indonesia, Jakarta berdenyut dengan ritme kehidupan metropolitan yang dinamis</p>
                 </div>
                 <figure><img src="{{ asset('assets/Proyek Baru (5).png') }}" alt="Shoes" /></figure>
             </div>
@@ -379,7 +378,7 @@
                         <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
                         <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <p>Bekasi, kota yang terus berkembang, merupakan harmoni sempurna antara industri modern dan kehidupan komunal yang erat.</p>
                 </div>
                 <figure><img src="{{ asset('assets/Proyek Baru (4).png') }}" alt="Shoes" /></figure>
             </div>
@@ -396,36 +395,36 @@
             <div class="card-body">
                 <h2 class="card-title text-gray-700">Event</h2>
                 <div class="carousel w-full">
-                    <div id="slide1" class="carousel-item relative w-full">
+                    <div id="slideEvent1" class="carousel-item relative w-full">
                         <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg"
                             class="w-full" />
                         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide4" class="btn btn-circle">❮</a>
-                            <a href="#slide2" class="btn btn-circle">❯</a>
+                            <a href="#slideEvenet4" class="btn btn-circle">❮</a>
+                            <a href="#slideEvent2" class="btn btn-circle">❯</a>
                         </div>
                     </div>
-                    <div id="slide2" class="carousel-item relative w-full">
+                    <div id="slideEvent2" class="carousel-item relative w-full">
                         <img src="https://daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg"
                             class="w-full" />
                         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide1" class="btn btn-circle">❮</a>
-                            <a href="#slide3" class="btn btn-circle">❯</a>
+                            <a href="#slideEvent1" class="btn btn-circle">❮</a>
+                            <a href="#slideEvent3" class="btn btn-circle">❯</a>
                         </div>
                     </div>
-                    <div id="slide3" class="carousel-item relative w-full">
+                    <div id="slideEvent3" class="carousel-item relative w-full">
                         <img src="https://daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg"
                             class="w-full" />
                         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide2" class="btn btn-circle">❮</a>
-                            <a href="#slide4" class="btn btn-circle">❯</a>
+                            <a href="#slideEvent2" class="btn btn-circle">❮</a>
+                            <a href="#slideEvenet4" class="btn btn-circle">❯</a>
                         </div>
                     </div>
-                    <div id="slide4" class="carousel-item relative w-full">
+                    <div id="slideEvenet4" class="carousel-item relative w-full">
                         <img src="https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg"
                             class="w-full" />
                         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide3" class="btn btn-circle">❮</a>
-                            <a href="#slide1" class="btn btn-circle">❯</a>
+                            <a href="#slideEvent3" class="btn btn-circle">❮</a>
+                            <a href="#slideEvent1" class="btn btn-circle">❯</a>
                         </div>
                     </div>
                 </div>

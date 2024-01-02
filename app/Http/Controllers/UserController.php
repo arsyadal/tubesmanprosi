@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Event;
 use App\Models\Course;
+use App\Models\Bootcamp;
 use App\Models\Kuisioner;
 use App\Models\Activities;
 use App\Models\CourseModul;
 use Illuminate\Http\Request;
+use App\Models\EventAudience;
 use App\Models\ModulQuestion;
 use App\Models\CourseCategory;
+use App\Models\BootcampAudience;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +23,8 @@ class UserController extends Controller
     public function index(){
         $courseCategory = CourseCategory::where('name', auth()->user()->courseType)->first();
         $course = Course::where('category_id', $courseCategory->id)->get();
+        $events = EventAudience::where('user_id', auth()->user()->id)->get();
+        $bootcamps = BootcampAudience::where('user_id', auth()->user()->id)->get();
         $categoryValue = 0;
         $categoryActivities = 0;
         foreach($course as $data){
@@ -43,7 +49,7 @@ class UserController extends Controller
             $categoryProgress = $categoryValue / $categoryActivities;
         }
 
-        return view('user.index', compact('courseCategory', 'course', 'categoryProgress'));
+        return view('user.index', compact('courseCategory', 'course', 'categoryProgress', 'events', 'bootcamps'));
     }
 
     public function course(){
@@ -103,7 +109,15 @@ class UserController extends Controller
     }
 
     public function bootcampEvent(){
-        return view('user.bootcampEvent');
+        $category = CourseCategory::where('name', auth()->user()->courseType)->first();
+        $events = Event::where('category_id', $category->id)->get();
+        $bootcamps = Bootcamp::where('category_id', $category->id)->get();
+
+        return view('user.bootcampEvent', compact('events', 'bootcamps'));
+    }
+
+    public function daftarEventBootcamp(Request $request){
+        
     }
 
     public function goOnline(){
@@ -210,9 +224,9 @@ class UserController extends Controller
         if($average <= 2){
             $user->update(['courseType' => 'GoOnline']);
         } elseif($average > 2 && $average < 4) {
-            $user->update(['courseType' => 'GoGlobal']);
-        } elseif ($average >= 4){
             $user->update(['courseType' => 'GoModern']);
+        } elseif ($average >= 4){
+            $user->update(['courseType' => 'GoGlobal']);
         }
         $request->session()->forget('answer');
         return redirect()->route('user.index')->with('success',"Your Course Type is $user->courseType");
@@ -242,5 +256,35 @@ class UserController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Your progress has been saved');
+    }
+
+    public function bootcampRegister(Request $request){
+        $check = BootcampAudience::where('user_id', auth()->user()->id)->where('bootcamp_id', $request->bootcamp_id)->first();
+        
+        if($check){
+            return redirect()->back()->with('warning', "You're already registered on this bootcamp");
+        }
+        
+        BootcampAudience::create([
+            'user_id' => auth()->user()->id,
+            'bootcamp_id' => $request->bootcamp_id
+        ]);
+        
+        return redirect()->back()->with('success', 'Your registration has been registered');
+    }
+    
+    public function eventRegister(Request $request){
+        $check = EventAudience::where('user_id', auth()->user()->id)->where('event_id', $request->event_id)->first();
+        
+        if($check){
+            return redirect()->back()->with('warning', "You're already registered on this event");
+        }
+
+        EventAudience::create([
+            'user_id' => auth()->user()->id,
+            'event_id' => $request->event_id
+        ]);
+
+        return redirect()->back()->with('success', 'Your registration has been registered');
     }
 }

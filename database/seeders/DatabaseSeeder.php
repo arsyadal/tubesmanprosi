@@ -123,12 +123,12 @@ class DatabaseSeeder extends Seeder
         ]);
         CourseCategory::create([
             "name" => "GoModern",
-            "deskripsi" => "Go Online",
+            "deskripsi" => "Go Modern",
             'file' => 'online.jpg',
         ]);
         CourseCategory::create([
             "name" => "GoGlobal",
-            "deskripsi" => "Go Online",
+            "deskripsi" => "Go Global",
             'file' => 'kelass3.avif',
         ]);
     }

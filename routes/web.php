@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/course/activities/progress/{id}', [UserController::class, 'activitiesProgress'])->name('activitiesProgress');
         
         Route::get('/bootcamp-event', [UserController::class, 'bootcampEvent'])->name('bootcampEvent');
+        Route::post('/bootcamp/register', [UserController::class, 'bootcampRegister'])->name('bootcamp.register');
+        Route::post('/event/register', [UserController::class, 'eventRegister'])->name('event.register');
 
         Route::get('/kuisioner/sessionOne', [UserController::class, 'kuisionerSessionOne'])->name('kuisionerSessionOne');
         Route::post('/kuisioner/sessionOneStore', [UserController::class, 'kuisionerSessionOneStore'])->name('kuisionerSessionOneStore');
@@ -79,11 +81,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/event-bootcamp', [EventBootcampController::class, 'index'])->name('eventBootcamp');
         Route::get('/event-bootcamp/{category}', [EventBootcampController::class, 'detail'])->name('eventBootcamp.detail');
 
+        Route::get('/event-create/{category}', [EventBootcampController::class, 'eventCreate'])->name('event.create');
+        Route::post('/event-store', [EventBootcampController::class, 'eventStore'])->name('event.store');
+        Route::get('/event/{id}', [EventBootcampController::class, 'eventDetail'])->name('event.read');
+        Route::get('/event/edit/{id}', [EventBootcampController::class, 'eventEdit'])->name('event.edit');
+        Route::post('/event/update/{id}', [EventBootcampController::class, 'eventUpdate'])->name('event.update');
+        Route::delete('/event/delete/{id}', [EventBootcampController::class, 'eventDestroy'])->name('event.destroy');
+        
+        Route::get('/bootcamp-create/{category}', [EventBootcampController::class, 'bootcampCreate'])->name('bootcamp.create');
+        Route::post('/bootcamp-store', [EventBootcampController::class, 'bootcampStore'])->name('bootcamp.store');
+        Route::get('/bootcamp/{id}', [EventBootcampController::class, 'bootcampDetail'])->name('bootcamp.read');
+        Route::get('/bootcamp/edit/{id}', [EventBootcampController::class, 'bootcampEdit'])->name('bootcamp.edit');
+        Route::post('/bootcamp/update/{id}', [EventBootcampController::class, 'bootcampUpdate'])->name('bootcamp.update');
+        Route::delete('/bootcamp/delete/{id}', [EventBootcampController::class, 'bootcampDestroy'])->name('bootcamp.destroy');
+
         Route::get('/kuisioner', [AdminController::class, 'kuisioner'])->name('kuisioner');
         Route::post('/kuisioner/add/{type}', [AdminController::class, 'addKuisioner'])->name('kuisionerAdd');
         Route::patch('/kuisioner/edit/{id}', [AdminController::class, 'editKuisioner'])->name('kuisionerEdit');
         Route::delete('/kuisioner/delete/{id}', [AdminController::class, 'deleteKuisioner'])->name('kuisionerDelete');
         Route::patch('/kuisionerType/edit/{type}', [AdminController::class, 'editKuisionerType'])->name('kuisionerTypeEdit');
+
+        Route::get('/umkm-list', [AdminController::class, 'umkmList'])->name('umkmlist');
     });
 });
 

@@ -2,10 +2,7 @@
     <div class="py-12 px-10">
         <div class="text-gray-700">
             <h1 class="text-2xl font-bold">Halo, {{ auth()->user()->name }}</h1>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consectetur nunc at diam pulvinar dictum.
-                Ut
-                hendrerit, lorem ac auctor tristique, odio augue malesuada enim, eu condimentum est enim quis leo. Nulla
-                turpis tellus, iaculis et sagittis at, maximus et mi. </p>
+            <p> Selamat datang di page Admin Dashboard</p>
         </div>
         <div class="mt-4 flex gap-x-5">
             <div class="w-2/12">

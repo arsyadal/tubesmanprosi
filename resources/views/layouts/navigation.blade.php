@@ -39,6 +39,9 @@
                     <x-nav-link :href="route('admin.kuisioner')" :active="request()->routeIs('admin.kuisioner')">
                         {{ __('Kuisioner') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.umkmlist')" :active="request()->routeIs('admin.umkmlist')">
+                        {{ __('UMKM') }}
+                    </x-nav-link>
                     @endrole
                 </div>
             </div>
