@@ -41,7 +41,10 @@ class AdminController extends Controller
                         $course->allActivities++;
                     }
                 }
-                $course->progress = ($course->checked / $course->allActivities) * 100;
+                $course->progress = 0;
+                if($course->allActivities > 0){
+                    $course->progress = ($course->checked / $course->allActivities) * 100;
+                }
                 $categoryValue+= $course->progress;
                 $categoryActivities++;
             }
