@@ -26,25 +26,25 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             No
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Nama User
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Nama UMKM
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Jenis Usaha
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Skala Usaha
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             No. Telp
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 text-center">
                             Progress
                         </th>
                     </tr>
@@ -52,25 +52,25 @@
                 <tbody>
                     @foreach($umkmlist as $key => $value)
                     <tr class="bg-white border-b">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
                             {{ $key+1 }}
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $value->name }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $value->namaUMKM }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                          {{ $value->jenisUMKM }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                          {{ $value->skalaUMKM }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                          {{ $value->nomorUMKM }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                          {{ $value->courseType }}
                         </td>
                     </tr>

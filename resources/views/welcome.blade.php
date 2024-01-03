@@ -106,7 +106,7 @@
                     @else
                     <div class="flex items-center">
                         <a href="{{ route('register') }}" class="btn btn-active btn-primary text-white mr-5">Daftar</a>
-                        <a href="{{ route('login') }}" class="btn text-white">Login</a>
+                        <a href="{{ route('login') }}" class="btn btn-neutral text-white">Login</a>
                     </div>
                     @endauth
                 </div>

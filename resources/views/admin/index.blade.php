@@ -17,7 +17,7 @@
                             <path
                                 d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
                         </svg>
-                        {{ $allUser }} Peserta
+                        {{ count($allUser) }} Peserta
                     </button>
                     <button
                         class="btn text-white btn-primary flex items-center gap-x-2 bg-[#F9432A] border-white px-5 py-2 mt-3 w-full rounded-lg">
@@ -40,16 +40,16 @@
                     <h1 class="font-bold text-2xl">Perkembangan LearnUMKM</h1>
                     <div class="flex flex-col gap-y-4 w-full mt-3">
                         <div class="flex justify-between gap-x-3 items-center">
-                            <progress class="progress w-full h-10 progress-primary" value="0" max="100"></progress>
-                            <p class="font-bold text-2xl w-2/12 text-right">Go Online</p>
+                            <progress class="progress w-full h-10 progress-primary" value="{{ $goOnlineProgress }}" max="100"></progress>
+                            <p class="font-bold text-2xl w-3/12 text-right">{{$goOnlineProgress}}% Go Online</p>
                         </div>
                         <div class="flex justify-between gap-x-3 items-center">
-                            <progress class="progress w-full h-10 progress-primary" value="10" max="100"></progress>
-                            <p class="font-bold text-2xl w-2/12 text-right">Go Modern</p>
+                            <progress class="progress w-full h-10 progress-primary" value="{{ $goModernProgress }}" max="100"></progress>
+                            <p class="font-bold text-2xl w-3/12 text-right">{{$goModernProgress}}% Go Modern</p>
                         </div>
                         <div class="flex justify-between gap-x-3 items-center">
-                            <progress class="progress w-full h-10 progress-primary" value="40" max="100"></progress>
-                            <p class="font-bold text-2xl w-2/12 text-right">Go Global</p>
+                            <progress class="progress w-full h-10 progress-primary" value="{{ $goGlobalProgress }}" max="100"></progress>
+                            <p class="font-bold text-2xl w-3/12 text-right">{{$goGlobalProgress}}% Go Global</p>
                         </div>
                     </div>
                 </div>

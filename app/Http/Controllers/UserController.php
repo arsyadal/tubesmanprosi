@@ -33,7 +33,8 @@ class UserController extends Controller
         $bootcamps = BootcampAudience::where('user_id', auth()->user()->id)->get();
         $categoryValue = 0;
         $categoryActivities = 0;
-        foreach($course as $data){
+        $courseCheck = Course::where('category_id', $courseCategory->id)->get();
+        foreach($courseCheck as $data){
             $data->checked = 0;
             $data->allActivities = 0;
             foreach($data->coursemoduls as $value){

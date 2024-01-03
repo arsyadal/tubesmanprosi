@@ -5,16 +5,75 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Kuisioner;
+use App\Models\Activities;
 use Illuminate\Http\Request;
 use App\Models\CourseCategory;
 
 class AdminController extends Controller
 {
     public function index(){
-        $allUser = User::role('user')->where('courseType', '!=', null)->count();
+        $allUser = User::role('user')->where('courseType', '!=', null)->get();
         $pending = User::role('user')->where('courseType', null)->count();
         $courseCategory = CourseCategory::all();
-        return view('admin.index', compact('allUser', 'pending', 'courseCategory'));
+
+        $goOnlineDone = 0;
+        $goModernDone = 0;
+        $goGlobalDone = 0;
+        $goOnlineUser = User::role('user')->where('courseType', 'GoOnline')->count();
+        $goModernUser = User::role('user')->where('courseType', 'GoModern')->count();
+        $goGlobalUser = User::role('user')->where('courseType', 'GoGlobal')->count();
+
+        foreach($allUser as $user){
+            $courseCategoryUser = CourseCategory::where('name', $user->courseType)->first();
+            $courses = Course::where('category_id', $courseCategoryUser->id)->get();
+            $categoryValue = 0;
+            $categoryActivities = 0;
+            foreach($courses as $course){
+                $course->checked = 0;
+                $course->allActivities = 0;
+                foreach($course->coursemoduls as $value){
+                    foreach($value->modulQuestions as $activities){
+                        $activities = Activities::where('user_id', $user->id)
+                        ->where('modul_questions_id', $activities->id)->first();
+                        if($activities){
+                            $course->checked++;
+                        }
+                        $course->allActivities++;
+                    }
+                }
+                $course->progress = ($course->checked / $course->allActivities) * 100;
+                $categoryValue+= $course->progress;
+                $categoryActivities++;
+            }
+            $categoryProgress = 0;
+            if($categoryActivities > 0){
+                $categoryProgress = $categoryValue / $categoryActivities;
+            }
+            if($categoryProgress == 100){
+                if($user->courseType == 'GoModern'){
+                    $goModernDone++;
+                }elseif($user->courseType == 'GoOnline'){
+                    $goOnlineDone++;
+                }elseif($user->courseType == 'GoGlobal'){
+                    $goGlobalDone++;
+                }
+            }
+        }
+        $goOnlineProgress = 0;
+        $goModernProgress = 0;
+        $goGlobalProgress = 0;
+        if($goOnlineUser > 0){
+            $goOnlineProgress = ($goOnlineDone / $goOnlineUser) * 100;
+        }
+        if($goModernUser > 0){
+            $goModernProgress = ($goModernDone / $goModernUser) * 100;
+        }
+        if($goGlobalUser > 0){
+            $goGlobalProgress = ($goGlobalDone / $goGlobalUser) * 100;
+        }
+
+
+        return view('admin.index', compact('allUser', 'pending', 'courseCategory', 'goOnlineProgress', 'goModernProgress', 'goGlobalProgress'));
     }
 
     public function kuisioner(){
